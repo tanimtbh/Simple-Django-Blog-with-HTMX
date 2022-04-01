@@ -1,0 +1,31 @@
+{% extends 'base_layout.html' %}
+
+{% block contents %}
+        
+        <h1>Category of {{category_name}} </h1>
+        </br>
+        <div class="articles">
+         {% for article in articles %}
+            <div class="article">
+                <img src="{{ article.thumb.url }}" alt="djangonautic" width="300" height="200" />
+                <h2><a href="{% url 'articles:detail' id=article.id slug=article.slug %}">{{ article.title }}</a></h2>
+                              
+                <p>
+                  {{ article.snippet }}
+                  <a href=" {% url 'articles:detail' id=article.id slug=article.slug %}">Read More</a>
+                </p>
+                <p>{{ article.date }}</p>
+
+            </div>
+        {% endfor %}
+                </br>
+                {% if articles.has_previous %}
+                    <a href=" {% url 'articles:category_url' category=category_name %}?page={{articles.previous_page_number}}">Previous  </a>
+                {% endif %}
+                <span> {{articles}} </span>
+                {% if articles.has_next %}
+                    <a href=" {% url 'articles:category_url' category=category_name  %}?page={{articles.next_page_number}}">Next  </a>
+                {% endif %}
+        </div> 
+
+{% endblock contents %}

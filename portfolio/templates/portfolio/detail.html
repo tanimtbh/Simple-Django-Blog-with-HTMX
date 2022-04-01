@@ -1,0 +1,8 @@
+{% extends 'base_layout.html' %}
+            {% block contents %}
+<div class="content" id="contents">
+<div hx-get="/" hx-trigger="load after:100ms" hx-target="#contents" hx-swap="innerHTML"></div>
+</div>
+
+
+            {% endblock contents %}

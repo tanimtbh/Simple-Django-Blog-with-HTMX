@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'styles.css'%}">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+<script src="https://unpkg.com/htmx.org@1.5.0"></script>
+</head>
+<body>
+
+<div class="top-container">
+<section id="welcome-section">
+<img class="profile-pic" src="https://tanimtbh.github.io/img/tanim.jpg" alt="">
+<h1 class="growing_head">&lt;/ MD Mizanur Rahman &gt;</h1>
+
+<h1>Find Me</h1>
+<div class="social-links">
+  <a id="profile-link" href="https://www.facebook.com/tanimtbh/" target="_blank" ><i class="fab fa-facebook-square find_me"></i></a>
+  <a id="profile-link"  href="https://github.com/tanimtbh/" target="_blank" ><i class="fab fa-github find_me"></i></a>
+  <a id="profile-link"  href="https://twitter.com/hole_team" target="_blank" ><i class="fab fa-twitter find_me"></i></a>
+  <a id="profile-link"  href="mailto:tanimtbh@gmail.com" ><i class="fas fa-at find_me"></i></a>
+  <a id="profile-link" href="tel:555-555-5555" ><i class="fas fa-mobile-alt find_me"></i></a>
+  
+</div>
+
+<div class="terminal">
+  <p class="growing_text">
+    tanim@TaNim:~$ Hi there! My name is <span class="highlighter">MD Mixanur Rahnam</span>. You can call me <span class="highlighter">"TaNiM" as well.</span><br><br>
+    Im a <span class="highlighter">Python</span> and <span class="highlighter">JavaScript</span> developer
+  </p>
+</div>
+</section>
+<div class="skills">
+  <h3 class="growing_text">{Skills}</h3>
+  <ul class="growing_text">
+    <li>Python</li>
+    <li>Javascript</li>
+    <li>Django</li>
+    <li>FastAPI</li>
+    <li>React</li>
+    <li>Vue</li>
+    <li>WebScraping</li>
+  </ul>
+</div>
+</div>
+
+
+
+<div class="header sticky" id="myHeader">
+  <nav>
+    <ul class="nav-list" id="nav-list">
+      <li>
+        <a class="a-terget active" href="#welcome-section"><i class="far fa-newspaper"></i>Blog</a>
+      </li>
+        <li>
+          <a class="a-terget" href="#welcome-section"><i class="fas fa-wrench"></i>Works</a>
+        </li>
+        <li>
+          <a class="a-terget" href="#projects"><i class="fas fa-graduation-cap"></i>Resumme</a>
+        </li>
+        <li>
+          <a class="a-terget" href="#profile-links"><i class="fas fa-globe"></i>Services</a>
+        </li>
+      </ul>
+  </nav>
+</div>
+
+<div class="content" id="contents">
+<div hx-get="/" hx-trigger="load after:100ms" hx-target="#contents" hx-swap="innerHTML"></div>
+</div>
+<script>
+var btns = document.getElementsByClassName("a-terget");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
+
+document.body.addEventListener('htmx:configRequest', (event) => {
+   event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';})
+</script>
+
+</body>
+</html>

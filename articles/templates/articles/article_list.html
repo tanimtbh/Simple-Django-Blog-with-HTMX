@@ -1,0 +1,33 @@
+{% comment %} {% extends 'base_layout.html' %}
+
+{% block contents %} {% endcomment %}
+        <div class="articles">
+         {% for article in articles %}
+            <div class="article">
+                <img src="{{ article.thumb.url }}" alt="djangonautic" width="300" height="200" />
+                <h2 class="growing_head"><a class="article_title" href="{% url 'articles:detail' id=article.id slug=article.slug %}">{{ article.title }}</a></h2>
+                              
+                <p class="article_snippet">
+                  {{ article.snippet }}
+                  <a href=" {% url 'articles:detail' id=article.id slug=article.slug %}">Read More</a>
+                </p>
+                <p>{{ article.date }}</p>
+
+            </div>
+        {% endfor %}
+
+                
+                {% comment %} {% if articles.has_previous %}
+                    <a href=" {% url 'articles:list' %}?page={{articles.previous_page_number}}">Previous  </a>
+
+                {% endif %} {% endcomment %}
+                {% comment %} <span> {{articles}} </span> {% endcomment %}
+                {% if articles.has_next %}
+                    {% comment %} <a href=" {% url 'articles:list' %}?page={{articles.next_page_number}}">Next  </a> {% endcomment %}
+                    <button hx-post=" {% url 'articles:inline_list' %}?page={{articles.next_page_number}}" hx-swap="outerHTML" >{{articles}}</button>
+                {% endif %}
+
+        </div>
+
+{% comment %} 
+{% endblock contents %} {% endcomment %}
